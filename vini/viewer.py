@@ -24,8 +24,8 @@ by these sections:
 ## Section: Settings Management ##
 ## Section: Closing the Viewer ##
 """
-
-from sip import setapi
+from PyQt5.sip import setapi
+# from sip import setapi
 setapi("QDate", 2)
 setapi("QDateTime", 2)
 setapi("QTextStream", 2)
@@ -3054,7 +3054,7 @@ class Viff(QtGui.QMainWindow):
             alpha_fract = self.images[index].alpha
             alpha = np.round(alpha_fract*100)
 
-        self.alpha_sld.setValue(alpha)
+        self.alpha_sld.setValue(int(alpha))
         
         log1("setAlphaFromSlider called (alpha {})".format(alpha))
         
@@ -3069,7 +3069,7 @@ class Viff(QtGui.QMainWindow):
         for i in range(len(self.images)):
             self.images[i].alpha = alpha
 
-        self.alpha_sld.setValue(alpha)
+        self.alpha_sld.setValue(int(alpha))
         
         log1("resetAlpha called")
         

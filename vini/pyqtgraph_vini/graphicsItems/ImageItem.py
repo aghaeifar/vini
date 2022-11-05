@@ -347,7 +347,7 @@ class ImageItem(GraphicsObject):
         profile = debug.Profiler()
         if self.image is None or self.image.size == 0:
             return
-        if isinstance(self.lut, collections.Callable):
+        if isinstance(self.lut, collections.abc.Callable):
             lut = self.lut(self.image)
         else:
             lut = self.lut
