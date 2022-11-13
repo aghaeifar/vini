@@ -10,7 +10,6 @@ import numpy as np
 from numpy import ctypeslib
 import scipy as sp
 from scipy import ndimage, linalg
-from distutils.version import LooseVersion, StrictVersion
 
 def resample_image(data, affine, shape, interpolation):
 
