@@ -19,9 +19,7 @@ def resample_image(data, affine, shape, interpolation):
 
     # The following is necessary because of an inconsistency in scipy's
     # resampling method for versions < 0.18.0.
-    if np.all(np.diag(np.diag(A)) == A):
-        if LooseVersion(sp.__version__) < LooseVersion("0.18.0"):
-            b = np.dot(np.linalg.inv(A),b)
+    if np.all(np.diag(np.diag(A)) == A):        
         A = np.diag(A)
 
     shape = tuple(np.asarray(shape).astype(int))

@@ -40,10 +40,10 @@ class Image3D(Image):
 
         self.image = img
 
-        self.image_res = img.get_data()
+        self.image_res = img.get_fdata()
 
-        self.extremum[0] = img.get_data().min()
-        self.extremum[1] = img.get_data().max()
+        self.extremum[0] = img.get_fdata().min()
+        self.extremum[1] = img.get_fdata().max()
 
         self.two_cm = color
         self.dialog.setPreferences(

@@ -56,18 +56,18 @@ def setPreferences(image, hdr, pref, f_type):
         color_cm = True
     
     # if data contain NaNs convert to zero
-    if np.isnan(image.get_data()).any():
-        notnan = image.get_data()
-        notnan[np.isnan(image.get_data())] = 0
+    if np.isnan(image.get_fdata()).any():
+        notnan = image.get_fdata()
+        notnan[np.isnan(image.get_fdata())] = 0
         image = Nifti2Image(notnan, image.affine)
 
     # allow 2d-images here:
-    if len(image.get_data().shape) == 2:
-       image = Nifti2Image(np.atleast_3d(image.get_data()), image.affine)
+    if len(image.get_fdata().shape) == 2:
+       image = Nifti2Image(np.atleast_3d(image.get_fdata()), image.affine)
 
-    if len(image.get_data().shape) == 3:
+    if len(image.get_fdata().shape) == 3:
         img = Image3D(image=image, color=color_cm)
-    elif len(image.get_data().shape) == 4:
+    elif len(image.get_fdata().shape) == 4:
         img = Image4D(image=image, color=color_cm)
         frame_time = hdr['pixdim'][4]
         if frame_time > 15:
@@ -107,7 +107,7 @@ def setPreferences(image, hdr, pref, f_type):
 
 def loadImageFromNifti(fileobject, pref, f_type):
     try:
-        image = Nifti2Image(fileobject.get_data(), fileobject.affine)
+        image = Nifti2Image(fileobject.get_fdata(), fileobject.affine)
         hdr = fileobject.header
     except RuntimeError:
             print("Cannot load Nifti object!")
@@ -139,14 +139,14 @@ def loadImageFromFile(filename, pref, f_type):
     if (filetype=='.nii' or filetype=='.gz'):
         try:
             temp_img = load(filename)
-            image = Nifti2Image(temp_img.get_data(), temp_img.affine)
+            image = Nifti2Image(temp_img.get_fdata(), temp_img.affine)
             hdr = temp_img.header
         except RuntimeError:
             print("Cannot load .nii or nii.gz file: {}".format(filename))
     elif (filetype=='.hdr' or filetype=='.img'):
         try:
             temp_img = load(filename)
-            image = Nifti2Image(temp_img.get_data(), temp_img.affine)
+            image = Nifti2Image(temp_img.get_fdata(), temp_img.affine)
             image.dataobj[np.isnan(image.dataobj)] = 0
             hdr = temp_img.header
         except RuntimeError:

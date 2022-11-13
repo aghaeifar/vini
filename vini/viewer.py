@@ -26,13 +26,13 @@ by these sections:
 """
 from PyQt5.sip import setapi
 # from sip import setapi
-setapi("QDate", 2)
-setapi("QDateTime", 2)
-setapi("QTextStream", 2)
-setapi("QTime", 2)
-setapi("QVariant", 2)
-setapi("QString", 2)
-setapi("QUrl", 2)
+# setapi("QDate", 2)
+# setapi("QDateTime", 2)
+# setapi("QTextStream", 2)
+# setapi("QTime", 2)
+# setapi("QVariant", 2)
+# setapi("QString", 2)
+# setapi("QUrl", 2)
 
 verbose_level = 5
 from .QxtSpanSlider import QxtSpanSlider
@@ -1290,7 +1290,7 @@ class Viff(QtGui.QMainWindow):
         max_t = -1
         
         for i in range(len(self.images)):
-            sh = self.images[i].image.get_data().shape
+            sh = self.images[i].image.get_fdata().shape
             if sh[0] > max_c:
                 max_c = sh[0]
             if sh[1] > max_s:
@@ -1763,7 +1763,7 @@ class Viff(QtGui.QMainWindow):
         
         index = self.imagelist.currentRow()
         if index >= 0:
-            value_set = np.unique(self.images[index].image.get_data())
+            value_set = np.unique(self.images[index].image.get_fdata())
             value_set_int = np.round(value_set).astype(np.int)
             delta_int = np.linalg.norm(value_set_int-value_set) / np.float(value_set.size)
             if value_set.size >= 256:

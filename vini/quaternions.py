@@ -24,8 +24,8 @@ they are applied on the left of the vector.  For example:
 import math
 import numpy as np
 
-MAX_FLOAT = np.maximum_sctype(np.float)
-FLOAT_EPS = np.finfo(np.float).eps
+MAX_FLOAT = np.maximum_sctype(np.float64)
+FLOAT_EPS = np.finfo(np.float64).eps
 
 
 def fillpositive(xyz, w2_thresh=None):

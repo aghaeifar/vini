@@ -172,7 +172,7 @@ class Image(object):
         return out
 
     def getOriginalDimensions(self):
-        return self.image.get_data().shape
+        return self.image.get_fdata().shape
 
     def getDimensions(self):
         return self.image_res.shape
@@ -209,10 +209,10 @@ class Image(object):
             self.threshold_pos = [0.0, self.extremum[1]]
             # discontinued choice: intelligent upper threshold
             # if self.upper is None:
-            #     length = self.image.get_data().size
+            #     length = self.image.get_fdata().size
             #     random_sample = np.random.randint(0, length, 10000)
-            #     random_sample_unr = np.unravel_index(random_sample, self.image.get_data().shape)
-            #     samples = self.image.get_data()[random_sample_unr]
+            #     random_sample_unr = np.unravel_index(random_sample, self.image.get_fdata().shape)
+            #     samples = self.image.get_fdata()[random_sample_unr]
             #     self.upper = np.percentile(samples, 99.9)
 
     def setNegThresholdsDefault(self):
@@ -318,7 +318,7 @@ class Image(object):
         """
         self.affine_res_inv = np.dot(np.linalg.inv(over_affine), t_affine)
         self.image_res = resample_image(
-            self.image.get_data(), affine=self.affine_res_inv,
+            self.image.get_fdata(), affine=self.affine_res_inv,
             shape=shape, interpolation=self.interp_type)
         self.res_shape = shape
         self.state_affine_over = True
@@ -329,7 +329,7 @@ class Image(object):
         """
         self.affine_res_inv = np.dot(np.linalg.inv(self.image.affine), affine)
         self.image_res = resample_image(
-            self.image.get_data(), affine=self.affine_res_inv,
+            self.image.get_fdata(), affine=self.affine_res_inv,
             shape=shape, interpolation=self.interp_type)
         self.res_shape = shape
         self.state_affine_over = False
@@ -339,7 +339,7 @@ class Image(object):
         Resamples with already given affine.
         """
         self.image_res = resample_image(
-            self.image.get_data(), affine=self.affine_res_inv,
+            self.image.get_fdata(), affine=self.affine_res_inv,
             shape=self.res_shape, interpolation=self.interp_type)
 
     def getAffine(self):
@@ -363,7 +363,7 @@ class Image(object):
 
     def setUnresampled(self):
         # TODO: setze self.affine_res_inv = np.eye(4)?
-        self.image_res = self.image.get_data()
+        self.image_res = self.image.get_fdata()
 
     def setHistogram(self):
         c_hist = self.getHistogram()
@@ -486,7 +486,7 @@ class Image(object):
         """
         Define colormap for discrete intensity values.
         """
-        value_set = np.unique(self.image.get_data())
+        value_set = np.unique(self.image.get_fdata())
 
         value_set = np.subtract(value_set, value_set[0])
         value_set = np.multiply(value_set, 1./value_set[-1])
