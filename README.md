@@ -13,13 +13,13 @@ The viewer is written in python and does not have any external dependencies.
 # Installation
 Install as python package via pip:
 
-        pip3 install git+https://github.com/lipsia-fmri/vini.git
+        pip3 install git+https://github.com/aghaeifar/vini.git
 
 
 # Upgrading
 Upgrading the already installed vini viewer works as follows:
 
-        pip3 install git+https://github.com/lipsia-fmri/vini.git --upgrade
+        pip3 install git+https://github.com/aghaeifar/vini.git --upgrade
 
 # How-to
 
