@@ -38,21 +38,21 @@ class Point(QtCore.QPointF):
         return 2
         
     def __reduce__(self):
-        return (Point, (self.x(), self.y()))
+        return (Point, (int(self.x()), int(self.y()) ))
         
     def __getitem__(self, i):
         if i == 0:
-            return self.x()
+            return int(self.x())
         elif i == 1:
-            return self.y()
+            return int(self.y())
         else:
             raise IndexError("Point has no index %s" % str(i))
         
     def __setitem__(self, i, x):
         if i == 0:
-            return self.setX(x)
+            return self.setX(int(x))
         elif i == 1:
-            return self.setY(x)
+            return self.setY(int(x))
         else:
             raise IndexError("Point has no index %s" % str(i))
         
